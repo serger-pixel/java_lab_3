@@ -13,6 +13,7 @@ public class AmericanFootball extends FootballTeam{
         super();
         _teamType = _defaultValueString;
         _extraArmor = _defaultValueBoolean;
+        _positions = _defaultValueString;
     }
 
     public AmericanFootball(String name, 

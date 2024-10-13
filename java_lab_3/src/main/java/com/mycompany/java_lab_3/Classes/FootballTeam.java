@@ -90,7 +90,7 @@ public abstract class FootballTeam {
     public boolean winCountVer(String value){
         if (Pattern.matches(_regInt, value) && 
                 Integer.parseInt(value) <= _gamesCount){
-            return true;
+                return true;
         }
         return false;
     }
