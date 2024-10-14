@@ -1,4 +1,4 @@
-package com.mycompany.java_lab_3.Classes;
+package main.java.com.mycompany.java_lab_3.Classes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.regex.Pattern;
@@ -137,27 +137,39 @@ public class League {
                 return false;       
 	}
 
-	public boolean editTeam(String name, int select) {
+	public boolean editTeam(String name, int type, int select, String value) {
             FootballTeam team = findTeam(name);
             if (team == null){
                 return false;
             }
             switch(select){
+                case 1:
+                    if(team.nameVer(value)){
+                        team.setName(value);
+                    }
+                case 2:
+                    
+                case 3:
+                    
+                case 4:
+                    
+                default:
+                    break;
+            }
+            switch(type){
                 case (1):
                     team = (AmericanFootball)team;
-                    team.getInfo();
                     break;
                 case (2):
                     team = (BeachFootball)team;
-                    team.getInfo();
                     break;
                 case (3):
                    team = (EuropeanFootball)team;
-                   team.getInfo();
                    break;
                default:
                    break;
             }
+            team.getInfo();
             
             return true;
 	}

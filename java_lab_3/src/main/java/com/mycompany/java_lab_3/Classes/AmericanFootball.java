@@ -1,4 +1,4 @@
-package com.mycompany.java_lab_3.Classes;
+package main.java.com.mycompany.java_lab_3.Classes;
 import java.util.regex.Pattern;
 
 public class AmericanFootball extends FootballTeam{
@@ -28,9 +28,9 @@ public class AmericanFootball extends FootballTeam{
     @Override
     public String getInfo(){
         return createString() + "\n"+
-                "Наличие доп. защиты: " + _extraArmor + "\n"+
-                "Тип команды: " + _teamType + "\n" +
-                "Позиции:" + _positions;
+                "5. Наличие доп. защиты: " + _extraArmor + "\n"+
+                "6. Тип команды: " + _teamType + "\n" +
+                "7. Позиции:" + _positions;
     }
     
     public String getTeamType(){
