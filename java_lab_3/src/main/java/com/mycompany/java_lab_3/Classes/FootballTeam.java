@@ -32,7 +32,7 @@ public abstract class FootballTeam {
      */
     static final boolean _defaultValueBoolean = false;
     
-    static final protected String _regName = "^[A-Z][a-z]*$";
+    static final protected String _regString = "^[A-Z][a-z]*$";
     
     static final protected String _regInt = "^[1-9][0-9]${2}";
     
@@ -93,8 +93,8 @@ public abstract class FootballTeam {
         return Pattern.matches(_regInt, value);
     }
     
-    public static boolean nameVer(String value){
-        return Pattern.matches(_regName, value);
+    public static boolean stringVer(String value){
+        return Pattern.matches(_regString, value);
     }
     
     public static boolean boolVer(String value){
@@ -117,7 +117,7 @@ public abstract class FootballTeam {
     }
     
     public boolean setName(String value){
-        if (nameVer(value)){
+        if (stringVer(value)){
             _name = value;
             return true;
         }

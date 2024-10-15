@@ -41,17 +41,9 @@ public class EuropeanFootball extends FootballTeam{
     public String getMascot(){
         return _mascot;
     }
-    
-    public boolean gameSchemeVer(String value){
-        return Pattern.matches(_regName, value);
-    }
-    
-    public boolean mascotVer(String value){
-        return Pattern.matches(_regName, value);
-    }
-    
+        
     public boolean setGameScheme(String value){
-        if (gameSchemeVer(value)){
+        if (stringVer(value)){
             _gameScheme = value;
             return true;
         }
@@ -67,7 +59,7 @@ public class EuropeanFootball extends FootballTeam{
     }
     
     public boolean setMascot(String value){
-        if (mascotVer(value)){
+        if (stringVer(value)){
             _mascot = value;
             return true;
         }

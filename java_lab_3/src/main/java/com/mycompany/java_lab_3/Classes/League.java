@@ -97,24 +97,12 @@ public class League {
             return _country;
         }
         
-        public boolean nameVer(String value){
-            return Pattern.matches(FootballTeam._regName, value);
-        }
-        
-        public boolean countryVer(String value){
-            return Pattern.matches(FootballTeam._regName, value);
-        }
-        
         public boolean yearVer(String value){
             return Pattern.matches(_regYear, value);
         }
         
-        public boolean divisonVer(String value){
-            return Pattern.matches(FootballTeam._regName, value);
-        }
-        
 	public boolean setName(String name) {
-            if (nameVer(name)){
+            if (FootballTeam.stringVer(name)){
                 _name = name;
                 return true;
             }
@@ -122,7 +110,7 @@ public class League {
 	}
 
 	public boolean setDivision(String value) {
-		if (divisonVer(value)){
+		if (FootballTeam.stringVer(value)){
                     _division = value;
                     return true;
                 }
