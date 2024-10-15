@@ -1,4 +1,4 @@
-package main.java.com.mycompany.java_lab_3.Classes;
+package com.mycompany.java_lab_3.Classes;
 import java.util.regex.Pattern;
 
 public class BeachFootball extends FootballTeam{
@@ -52,6 +52,8 @@ public class BeachFootball extends FootballTeam{
     public boolean goalkeeperVer(String value){
         return Pattern.matches(_regGoalkeeperForm, value);
     }
+    
+    public boolean socksAllowedVer()
     
     public boolean setLimitTemperature(String value){
         if (limitTemperatureVer(value)){

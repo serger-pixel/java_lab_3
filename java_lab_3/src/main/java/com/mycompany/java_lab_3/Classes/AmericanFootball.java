@@ -1,4 +1,4 @@
-package main.java.com.mycompany.java_lab_3.Classes;
+package com.mycompany.java_lab_3.Classes;
 import java.util.regex.Pattern;
 
 public class AmericanFootball extends FootballTeam{
