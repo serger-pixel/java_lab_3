@@ -80,25 +80,16 @@ public abstract class FootballTeam {
         return _players;
     }
     
-    public static boolean gamesCountVer(String value){
-        return Pattern.matches(_regInt, value);
-    }
-    
-    public static boolean playerVer(String value){
-        return (Pattern.matches(_regInt, value) && 
-                Integer.parseInt(value) <= _maxPlayers);
-    }
-    
-    public static boolean winCountVer(String value){
-        return Pattern.matches(_regInt, value);
-    }
-    
     public static boolean nameVer(String value){
         return Pattern.matches(_regName, value);
     }
     
     public static boolean boolVer(String value){
         return Pattern.matches(_regBool, value);
+    }
+    
+    public static boolean intVer(String value){
+        return Pattern.matches(_regInt, value);
     }
     
     public static boolean stringToBool(String value){
@@ -109,7 +100,7 @@ public abstract class FootballTeam {
     }
     
     public boolean setGamesCount(String value){
-        if (gamesCountVer(value)){
+        if (intVer(value)){
             _gamesCount = Integer.parseInt(value);
             return true;
         }
@@ -125,7 +116,7 @@ public abstract class FootballTeam {
     }
     
     public boolean setWinCount(String value){
-        if (winCountVer(value) && Integer.parseInt(value) <= _gamesCount){
+        if (intVer(value) && Integer.parseInt(value) <= _gamesCount){
             _winCount = Integer.parseInt(value);
             return true;
         }
@@ -133,7 +124,7 @@ public abstract class FootballTeam {
     }
     
     public boolean setPlayers(String value){
-        if (playerVer(value)){
+        if (intVer(value) && Integer.parseInt(value) <= _maxPlayers){
             _players = Integer.parseInt(value);
             return true;
         }
