@@ -80,19 +80,6 @@ public abstract class FootballTeam {
         return _players;
     }
     
-    public static boolean gamesCountVer(String value){
-        return Pattern.matches(_regInt, value);
-    }
-    
-    public static boolean playerVer(String value){
-        return (Pattern.matches(_regInt, value) && 
-                Integer.parseInt(value) <= _maxPlayers);
-    }
-    
-    public static boolean winCountVer(String value){
-        return Pattern.matches(_regInt, value);
-    }
-    
     public static boolean stringVer(String value){
         return Pattern.matches(_regString, value);
     }
