@@ -45,15 +45,13 @@ public class BeachFootball extends FootballTeam{
         return _socksAllowed;
     }
     
-    public boolean limitTemperatureVer(String value){
+    public static boolean limitTemperatureVer(String value){
         return Pattern.matches(_regLimitTemperature, value);
     }
     
-    public boolean goalkeeperVer(String value){
+    public static boolean goalkeeperVer(String value){
         return Pattern.matches(_regGoalkeeperForm, value);
     }
-    
-    public boolean socksAllowedVer()
     
     public boolean setLimitTemperature(String value){
         if (limitTemperatureVer(value)){
@@ -63,9 +61,12 @@ public class BeachFootball extends FootballTeam{
         return false;
     }
     
-    public boolean setSocksAllowed(boolean value){
-        _socksAllowed = value;
-        return true;
+    public boolean setSocksAllowed(String value){
+        if (boolVer(value)){
+            _socksAllowed = stringToBool(value);
+            return true;
+        }
+        return false;
     }
     
     public boolean setGoalkeeperForm(String value){

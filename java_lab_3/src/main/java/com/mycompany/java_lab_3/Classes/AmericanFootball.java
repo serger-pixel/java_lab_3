@@ -62,8 +62,11 @@ public class AmericanFootball extends FootballTeam{
         return true;
     }
     
-    public boolean setExtraArmor(boolean value){
-        _extraArmor = value;
-        return true;
-    }    
+    public boolean setExtraArmor(String value){
+        if (boolVer(value)){
+            _extraArmor = stringToBool(value);
+            return true;
+        }
+        return false;
+    }
 }

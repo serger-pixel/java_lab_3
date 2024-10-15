@@ -58,9 +58,12 @@ public class EuropeanFootball extends FootballTeam{
         return false;
     }
     
-    public boolean setShields(boolean value){
-        _shields = value;
-        return true;
+    public boolean setSocksAllowed(String value){
+        if (boolVer(value)){
+            _shields = stringToBool(value);
+            return true;
+        }
+        return false;
     }
     
     public boolean setMascot(String value){

@@ -21,6 +21,7 @@ public class TeamList {
     
     private ArrayList<FootballTeam> _teamMass;
     public TeamList(char type){
+        _teamMass = new ArrayList<>();
         String locName = FootballTeam._defaultValueString;
         int locPlayers = FootballTeam._defaultValueInt;
         int locGamesC = FootballTeam._defaultValueInt;
@@ -151,5 +152,14 @@ public class TeamList {
             default:
                 break;
         }
+    }
+
+    public TeamList() {
+        _teamMass = new ArrayList<>();
+    }
+    
+    
+    public void add(FootballTeam team){
+        _teamMass.add(team);
     }
 }
