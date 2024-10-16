@@ -50,7 +50,7 @@ public class EuropeanFootball extends FootballTeam{
         return false;
     }
     
-    public boolean setSocksAllowed(String value){
+    public boolean setShields(String value){
         if (boolVer(value)){
             _shields = stringToBool(value);
             return true;

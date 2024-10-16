@@ -20,14 +20,14 @@ public class TeamList {
     };
     
     private ArrayList<FootballTeam> _teamMass;
-    public TeamList(char type){
+    public TeamList(String type){
         _teamMass = new ArrayList<>();
         String locName = FootballTeam._defaultValueString;
         int locPlayers = FootballTeam._defaultValueInt;
         int locGamesC = FootballTeam._defaultValueInt;
         int locWinC = FootballTeam._defaultValueInt;
         switch (type){
-            case ('1'):
+            case ("1"):
                 int locLimTemp = FootballTeam._defaultValueInt;
                 String locGKF = FootballTeam._defaultValueString;
                 boolean locSocksA = FootballTeam._defaultValueBoolean;
@@ -67,7 +67,7 @@ public class TeamList {
                     locGamesC, locWinC, locLimTemp, locGKF, locSocksA);
                     _teamMass.add(localTeam);
                 }
-            case '2':
+            case "2":
                 String locTeamType = FootballTeam._defaultValueString;
                 String locPositions = FootballTeam._defaultValueString;
                 boolean locExtraArmor = FootballTeam._defaultValueBoolean;
@@ -108,7 +108,7 @@ public class TeamList {
                     _teamMass.add(localTeam);
                 }
                 break;
-            case '3':
+            case "3":
                 String locGameScheme = FootballTeam._defaultValueString;
                 String locMascot = FootballTeam._defaultValueString;
                 boolean locShields = FootballTeam._defaultValueBoolean;

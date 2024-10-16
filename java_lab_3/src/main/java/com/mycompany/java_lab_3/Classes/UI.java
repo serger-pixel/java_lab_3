@@ -1,4 +1,5 @@
 package com.mycompany.java_lab_3.Classes;
+import java.util.regex.Pattern;
 import java.util.Scanner;
 
 public class UI {
@@ -26,7 +27,8 @@ public class UI {
     static private final String _shieldsMess = "Are Shields needed?"
             + " (true/false)";
     static private final String _mascotMess = "Enter Mascot";
-    static private final String _welcomeMess = "Enter team type";
+    static private final String _welcomeMess = "Enter team type(1/2/3)";
+    static private final String _errorMess = "ERROR";
     static private final String _typeMess = ""
             + "1. Beach football" + "\n"
             + "2. American football" + "\n"
@@ -52,31 +54,158 @@ public class UI {
      */
     public void startApplication(){
         System.out.println(_welcomeMess);
-        System.out.println(_typeMess);
-        char userSelection = scanInput().charAt(0);
-        System.out.println(_nameMess);
-        String userSelName = scanInput();
-        System.out.println(_gamesCountMess);
-        String userSelGamCnt = scanInput();
-        System.out.println(_playersCountMess);
-        String userSelPlaCnt = scanInput();
-        System.out.println(_winCountMess);
-        String userSelWinCnt = scanInput();
+        FootballTeam team = null;
+        String userSelection = getSelMess(_welcomeMess).substring(0, 1);
+        switch (userSelection){
+            case "1":
+                team = new BeachFootball();
+                break;
+            case "2":
+                team = new AmericanFootball();
+                break;
+            case "3":
+                team = new EuropeanFootball();
+                break;
+            default:
+                break;
+        }
+        getDefMess(_nameMess, team);
+        getDefMess(_gamesCountMess, team);
+        getDefMess(_playersCountMess, team);
+        getDefMess(_winCountMess, team);
         TeamList teams = new TeamList(userSelection);
         switch (userSelection){
-            case '1':
-                System.out.println(_limTempMess);
-                String userSelTem = scanInput();
-                System.out.println(_goalkeepMess);
-                String userSelGks = scanInput();
-                System.out.println(_playersCountMess);
-                String userSelSocAl = scanInput();
-                
+            case "1":
+                BeachFootball beachTeam = new BeachFootball(); 
+                getDefMess(_limTempMess, beachTeam, userSelection);
+                getDefMess(_goalkeepMess, beachTeam, userSelection);
+                getDefMess(_socksMess, beachTeam, userSelection);
+                team = beachTeam;
                 break;
-        
+            case "2":
+                AmericanFootball amerTeam = new AmericanFootball(); 
+                getDefMess(_limTempMess, amerTeam, userSelection);
+                getDefMess(_teamTypeMess, amerTeam, userSelection);
+                getDefMess(_extraArmorMess, amerTeam, userSelection);
+                team = amerTeam;
+                break;
+            case "3":
+                EuropeanFootball europTeam = new EuropeanFootball(); 
+                getDefMess(_mascotMess, europTeam, userSelection);
+                getDefMess(_gameSchemeMess, europTeam, userSelection);
+                getDefMess(_shieldsMess, europTeam, userSelection);
+                team = europTeam;
+                break;
+            default: 
+                break;
+        }
+        teams.add(team);
+    }
+    
+    public void getDefMess(String mess, FootballTeam team, String type){
+        System.out.println(mess);
+        boolean verification = selDefVer(mess, scanInput(), team, type);
+        while (!verification){
+            System.out.println(_errorMess);
+            System.out.println(mess);
+            verification = selDefVer(mess, scanInput(), team);
         }
     }
     
+    public void getDefMess(String mess, FootballTeam team){
+        System.out.println(mess);
+        boolean verification = selDefVer(mess, scanInput(), team);
+        while (!verification){
+            System.out.println(_errorMess);
+            System.out.println(mess);
+            verification = selDefVer(mess, scanInput(), team);
+        }
+    }
+    
+    private boolean selDefVer(String mess, String userInput, FootballTeam team, 
+            String type){
+        boolean verification = FootballTeam._defaultValueBoolean;
+        AmericanFootball amerTeam = null;
+        BeachFootball beachTeam = null;
+        EuropeanFootball europTeam = null;
+        switch (type){
+            case "2":
+                amerTeam = (AmericanFootball)team;
+                break;
+            case "1":
+                beachTeam = (BeachFootball)team;
+                break;
+            case "3":
+                europTeam = (EuropeanFootball)team;
+                break;
+            default:
+                break;
+        }
+        switch (mess){
+            case _limTempMess:
+                verification = beachTeam.setLimitTemperature(userInput);
+                break;
+            case _goalkeepMess:
+                verification = beachTeam.setGoalkeeperForm(userInput);
+                break;
+            case _socksMess:
+                verification = beachTeam.setSocksAllowed(userInput);
+                break;
+            case _teamTypeMess:
+                verification = amerTeam.setTeamType(userInput);
+                break;
+            case _positionsMess:
+                verification = amerTeam.setPositions(userInput);
+                break;
+            case _extraArmorMess:
+                verification = amerTeam.setExtraArmor(userInput);
+                break;
+            case _gameSchemeMess:
+                verification = europTeam.setGameScheme(userInput);
+                break;
+            case _mascotMess:
+                verification = europTeam.setMascot(userInput);
+                break;
+            case _shieldsMess:
+                verification = europTeam.setShields(userInput);
+                break;
+            default:
+                break;
+        }
+        return verification;
+    }
+    
+    private boolean selDefVer(String mess, String userInput, FootballTeam team){
+        boolean verification = FootballTeam._defaultValueBoolean;
+        switch (mess){
+            case _nameMess:
+                verification = team.setName(userInput);
+                break;
+            case _gamesCountMess:
+                verification = team.setGamesCount(userInput);
+                break;
+            case _playersCountMess:
+                verification = team.setPlayers(userInput);
+                break;
+            case _winCountMess:
+                verification = team.setWinCount(userInput);
+                break;
+            default:
+                break;
+        }
+        return verification;
+    }
+        
+    public String getSelMess(String mess){
+        String userInput = scanInput();
+        System.out.println(mess);
+        while(!League.selVer(mess)){
+            System.out.println(_errorMess);
+            System.out.println(mess);
+            userInput = scanInput();
+        }
+         return userInput;           
+    }
     /**
      * Получение ввода пользователя
      * @return введённую строчку

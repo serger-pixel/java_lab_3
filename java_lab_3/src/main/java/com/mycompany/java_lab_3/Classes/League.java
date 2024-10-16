@@ -11,6 +11,7 @@ public class League {
         private String _country;
 	private int _year;
         static final String _regYear = "^(19|20)\\d{2}$";
+        static final String _regSel = "^(1|2|3)${1}";
         static enum selections {
             american,
             beach,
@@ -99,6 +100,10 @@ public class League {
         
         public boolean yearVer(String value){
             return Pattern.matches(_regYear, value);
+        }
+        
+        public static boolean selVer(String value){
+            return Pattern.matches(_regSel, value);
         }
         
 	public boolean setName(String name) {
