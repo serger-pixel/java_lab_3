@@ -1,4 +1,4 @@
-package com.mycompany.java_lab_3.Classes;
+package main.java.com.mycompany.java_lab_3.Classes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.regex.Pattern;
@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class League {
 
 	private String _name;
-	private ArrayList<FootballTeam> _teams;
+	private TeamList _teams;
 	private String _division;
         private String _country;
 	private int _year;
@@ -17,8 +17,13 @@ public class League {
             beach,
             european; 
         };
+        public static String[][] _defaultLeagues = {
+            {"SunnyLeague", "1", "Brasil", "2001"},
+            {"RegbiLeague", "2", "America", "1990"},
+            {"FootLeague", "3", "Germany", "1995"}
+        };
         
-	public League(String name, ArrayList<FootballTeam> teams, 
+	public League(String name, TeamList teams, 
                 String division, int year, String country) {
             _name = name;
             _teams = teams;
@@ -36,56 +41,26 @@ public class League {
 	}
 
 	public FootballTeam findTheBest() {
-            FootballTeam team = _teams.get(0);
-            int theBestCount = team.getWinCount();
-            for (int i = 1; i< _teams.size(); i++){
-                if (_teams.get(i).getWinCount() > theBestCount){
-                    team = _teams.get(i);
-                }
-            }
-            return team;
+            return _teams.findTheBest();
 	}
 
 	public ArrayList<FootballTeam> findAboveAverege() {
-            int averageWins = FootballTeam._defaultValueInt;
-            int cntTeam = _teams.size();
-            for (int i = 0; i< _teams.size(); i++){
-                averageWins += _teams.get(i).getGamesCount();
-            }
-            int aboveAverage = averageWins/cntTeam;
-            ArrayList<FootballTeam> aboveAverageTeam = new ArrayList<>();
-            for (int i = 0; i< _teams.size(); i++){
-                if (_teams.get(i).getWinCount() > aboveAverage){
-                    aboveAverageTeam.add(_teams.get(i));
-                }
-            }
-            return aboveAverageTeam;
+            return _teams.findAboveAverege();
 	}
 
 	public void sortTeams() {
-            Collections.sort(_teams, 
-                    (team1, team2)-> Integer.compare(team1.getWinCount(), 
-                            team2.getWinCount()));
+            _teams.sortTeams();
 	}
 
 	
 	public FootballTeam findTeam(String name) {
-            for (int i = 0; i < _teams.size(); i++){
-                if (_teams.get(i).getName() == name){
-                    return _teams.get(i);
-                }
-            }
-            return null;
+            return _teams.findTeam(name);
 	}
 
 	public String getName() {
             return _name;
 	}
-
-	public ArrayList<FootballTeam> getTeams() {
-            return _teams;
-	}
-
+        
 	public String getDivision() {
             return _division;
 	}
@@ -129,15 +104,23 @@ public class League {
                 }
                 return false;       
 	}
+        
+        public boolean setCountry(String value){
+            if(FootballTeam.stringVer(value)){
+                _country = value;
+                return true;
+            }
+            return false;
+        }
 
-	public boolean editTeam(String name, int type, int select, String value) {
+	public boolean editTeam(String name, String type, String select, String value) {
             FootballTeam team = findTeam(name);
             if (team == null){
                 return false;
             }
             switch(select){
-                case 1:
-                    if(team.nameVer(value)){
+                case "1":
+                    if(team.nameVer(value)){ //!!!!!
                         team.setName(value);
                     }
                 case 2:
@@ -166,5 +149,24 @@ public class League {
             
             return true;
 	}
+        
+        public String getTeamList(){
+            String info = new String();
+            int select = 1;
+            for(int i = 0; i < _teams.length(); i++){
+                FootballTeam locTeam = _teams.get(i);
+                info += select +". "+ locTeam.getName() + "\n" ;
+                select++;
+            }
+            return info;
+        }
+        
+        public boolean setTeams(TeamList tl){
+            if(tl != null){
+                _teams = tl;
+                return true;
+            }
+            return false;
+        }
 
 }

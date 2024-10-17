@@ -1,5 +1,6 @@
-package com.mycompany.java_lab_3.Classes;
+package main.java.com.mycompany.java_lab_3.Classes;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TeamList {
     static public final String[][] _BeachInfo = {
@@ -162,4 +163,56 @@ public class TeamList {
     public void add(FootballTeam team){
         _teamMass.add(team);
     }
+    
+    public FootballTeam get(int i){
+        return _teamMass.get(i);
+    }
+    
+    public int length(){
+        return _teamMass.size();
+    }
+    
+    public FootballTeam findTheBest() {
+            FootballTeam team = _teamMass.get(0);
+            int theBestCount = team.getWinCount();
+            for (int i = 1; i< _teamMass.size(); i++){
+                if (_teamMass.get(i).getWinCount() > theBestCount){
+                    team = _teamMass.get(i);
+                }
+            }
+            return team;
+	}
+
+	public ArrayList<FootballTeam> findAboveAverege() {
+            int averageWins = FootballTeam._defaultValueInt;
+            int cntTeam = _teamMass.size();
+            for (int i = 0; i< _teamMass.size(); i++){
+                averageWins += _teamMass.get(i).getGamesCount();
+            }
+            int aboveAverage = averageWins/cntTeam;
+            ArrayList<FootballTeam> aboveAverageTeam = new ArrayList<>();
+            for (int i = 0; i< _teamMass.size(); i++){
+                if (_teamMass.get(i).getWinCount() > aboveAverage){
+                    aboveAverageTeam.add(_teamMass.get(i));
+                }
+            }
+            return aboveAverageTeam;
+	}
+
+	public void sortTeams() {
+            Collections.sort(_teamMass, 
+                    (team1, team2)-> Integer.compare(team1.getWinCount(), 
+                            team2.getWinCount()));
+	}
+
+	
+	public FootballTeam findTeam(String name) {
+            for (int i = 0; i < _teamMass.size(); i++){
+                if (_teamMass.get(i).getName() == name){
+                    return _teamMass.get(i);
+                }
+            }
+            return null;
+	}
+        
 }

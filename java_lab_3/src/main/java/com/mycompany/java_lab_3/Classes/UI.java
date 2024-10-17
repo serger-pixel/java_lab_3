@@ -1,4 +1,4 @@
-package com.mycompany.java_lab_3.Classes;
+package main.java.com.mycompany.java_lab_3.Classes;
 import java.util.regex.Pattern;
 import java.util.Scanner;
 
@@ -56,6 +56,7 @@ public class UI {
         System.out.println(_welcomeMess);
         FootballTeam team = null;
         String userSelection = getSelMess(_welcomeMess).substring(0, 1);
+        League league = new League();
         switch (userSelection){
             case "1":
                 team = new BeachFootball();
@@ -69,6 +70,26 @@ public class UI {
             default:
                 break;
         }
+        int lgInd = Integer.parseInt(userSelection) - 1;
+        for(int i = 0; i < League._defaultLeagues[0].length; i++){
+            switch(i){
+                case 0:
+                    league.setName(League._defaultLeagues[lgInd][i]);
+                    break;
+                case 1:
+                    league.setDivision(League._defaultLeagues[lgInd][i]);
+                    break;
+                case 2:
+                    league.setCountry(League._defaultLeagues[lgInd][i]);
+                    break;
+                case 3:
+                    league.setYear(League._defaultLeagues[lgInd][i]);
+                    break;
+                default:
+                    break;      
+            }
+        }
+        
         getDefMess(_nameMess, team);
         getDefMess(_gamesCountMess, team);
         getDefMess(_playersCountMess, team);
@@ -100,6 +121,7 @@ public class UI {
                 break;
         }
         teams.add(team);
+        league.setTeams(teams);
     }
     
     public void getDefMess(String mess, FootballTeam team, String type){
