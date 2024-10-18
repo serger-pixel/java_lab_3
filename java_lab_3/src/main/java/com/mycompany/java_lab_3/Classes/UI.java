@@ -7,29 +7,29 @@ public class UI {
      *  Сообщение для пользователя
      */
     private String _message; 
-    /**
+    /*
      *  Объект сканера
      */
-    private Scanner _sc; 
-    static private final String _nameMess = "Enter Name";
-    static private final String _gamesCountMess = "Enter Games count";
-    static private final String _playersCountMess = "Enter Players count";
-    static private final String _winCountMess = "Enter Wins count";
-    static private final String _limTempMess = "Enter Limit Temperature";
-    static private final String _goalkeepMess = "Enter Goalkeeper's form";
-    static private final String _socksMess = "Enter 'true' if socks allowed"
+    public static Scanner _sc; 
+    static public final String _nameMess = "Enter Name";
+    static public final String _gamesCountMess = "Enter Games count";
+    static public final String _playersCountMess = "Enter Players count";
+    static public final String _winCountMess = "Enter Wins count";
+    static public final String _limTempMess = "Enter Limit Temperature";
+    static public final String _goalkeepMess = "Enter Goalkeeper's form";
+    static public final String _socksMess = "Enter 'true' if socks allowed"
             + "and 'false' if not";
-    static private final String _teamTypeMess = "Enter Team Type";
-    static private final String _positionsMess = "Enter Positions";
-    static private final String _extraArmorMess = "Is Extra Armor needed? "
+    static public final String _teamTypeMess = "Enter Team Type";
+    static public final String _positionsMess = "Enter Positions";
+    static public final String _extraArmorMess = "Is Extra Armor needed? "
             + "(true/false)";
-    static private final String _gameSchemeMess = "Enter Game Scheme";
-    static private final String _shieldsMess = "Are Shields needed?"
+    static public final String _gameSchemeMess = "Enter Game Scheme";
+    static public final String _shieldsMess = "Are Shields needed?"
             + " (true/false)";
-    static private final String _mascotMess = "Enter Mascot";
-    static private final String _welcomeMess = "Enter team type(1/2/3)";
-    static private final String _errorMess = "ERROR";
-    static private final String _typeMess = ""
+    static public final String _mascotMess = "Enter Mascot";
+    static public final String _welcomeMess = "Enter team type(1/2/3)";
+    static public final String _errorMess = "ERROR";
+    static public final String _typeMess = ""
             + "1. Beach football" + "\n"
             + "2. American football" + "\n"
             + "3. European football";
@@ -122,9 +122,10 @@ public class UI {
         }
         teams.add(team);
         league.setTeams(teams);
+        String select = getEditSelection(userSelection, team);
     }
     
-    public void getDefMess(String mess, FootballTeam team, String type){
+    public static void getDefMess(String mess, FootballTeam team, String type){
         System.out.println(mess);
         boolean verification = selDefVer(mess, scanInput(), team, type);
         while (!verification){
@@ -134,7 +135,7 @@ public class UI {
         }
     }
     
-    public void getDefMess(String mess, FootballTeam team){
+    public static void getDefMess(String mess, FootballTeam team){
         System.out.println(mess);
         boolean verification = selDefVer(mess, scanInput(), team);
         while (!verification){
@@ -144,7 +145,7 @@ public class UI {
         }
     }
     
-    private boolean selDefVer(String mess, String userInput, FootballTeam team, 
+    public static boolean selDefVer(String mess, String userInput, FootballTeam team, 
             String type){
         boolean verification = FootballTeam._defaultValueBoolean;
         AmericanFootball amerTeam = null;
@@ -197,7 +198,7 @@ public class UI {
         return verification;
     }
     
-    private boolean selDefVer(String mess, String userInput, FootballTeam team){
+    public static boolean selDefVer(String mess, String userInput, FootballTeam team){
         boolean verification = FootballTeam._defaultValueBoolean;
         switch (mess){
             case _nameMess:
@@ -228,11 +229,38 @@ public class UI {
         }
          return userInput;           
     }
+    
+    public String getEditSelection(String type, FootballTeam team){
+        System.out.println("Выберете поле для изменения:");
+        String select = new String();
+        while(true){
+            switch(type){
+                case "1":
+                    ((BeachFootball)team).getInfo();
+                    break;
+                case "2":
+                    ((AmericanFootball)team).getInfo();
+                    break;
+                case "3":
+                    ((EuropeanFootball)team).getInfo();
+                    break;
+                default:
+                    break;
+            }
+            select = scanInput();
+            if(Pattern.matches("^([1-7])$", select)){
+                break;
+            }
+            System.out.println("Select from 1 to 7");
+        }
+        return select;
+    }
+    
     /**
      * Получение ввода пользователя
      * @return введённую строчку
      */
-    private String scanInput(){
+    public static String scanInput(){
         String inputUser = _sc.nextLine();
         return inputUser;
     }
