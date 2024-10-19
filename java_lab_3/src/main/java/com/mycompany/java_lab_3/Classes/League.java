@@ -43,8 +43,8 @@ public class League {
 	public FootballTeam findTheBest() {
             return _teams.findTheBest();
 	}
-
-	public ArrayList<FootballTeam> findAboveAverege() {
+        
+	public TeamList findAboveAverege() {
             return _teams.findAboveAverege();
 	}
 
@@ -112,74 +112,7 @@ public class League {
             }
             return false;
         }
-
-	public boolean editTeam(String name, String type, String select) {
-            FootballTeam team = findTeam(name);
-            if (team == null){
-                return false;
-            }
-
-            switch(select){
-                case "1":
-                    UI.getDefMess(UI._nameMess, team);
-                    break;
-                case "2":
-                    UI.getDefMess(UI._gamesCountMess, team);
-                    break;
-                case "3":
-                    UI.getDefMess(UI._playersCountMess, team);
-                    break;
-                case "4":
-                    UI.getDefMess(UI._winCountMess, team);
-                    break;
-                default:
-                    break;
-            }
-            switch(type){
-                case "1":
-                    switch(select){
-                        case "5":
-                            UI.getDefMess(UI._goalkeepMess, team);
-                        case "6":
-                            UI.getDefMess(UI._limTempMess, team);
-                        case "7":
-                            UI.getDefMess(UI._socksMess, team);
-                        default:
-                            break;
-                    }
-                    break;
-                case "2":
-                    switch(select){
-                        case "5":
-                            UI.getDefMess(UI._extraArmorMess, team);
-                        case "6":
-                            UI.getDefMess(UI._teamTypeMess, team);
-                        case "7":
-                            UI.getDefMess(UI._positionsMess, team);
-                        default:
-                            break;
-                    }
-                    break;
-                case "3":
-                   switch(select){
-                       case "5":
-                            UI.getDefMess(UI._gameSchemeMess, team);
-                        case "6":
-                            UI.getDefMess(UI._shieldsMess, team);
-                        case "7":
-                            UI.getDefMess(UI._mascotMess, team);
-                        default:
-                            break;
-                    }
-                   break;
-               default:
-                   break;
-            }
-            
-            
-            return true;
-	}
-        
+      
         public String getTeamList(){
             String info = new String();
             int select = 1;
@@ -198,5 +131,8 @@ public class League {
             }
             return false;
         }
-
+        
+        public TeamList getTeams(){
+            return _teams;
+        }
 }

@@ -12,6 +12,11 @@ public class UI {
      */
     public static Scanner _sc; 
     static public final String _nameMess = "Enter Name";
+    static public final String _sortMess = "Command are sorted";
+    static public final String _findTheBestMess = "The best team";
+    static public final String _nameTeamMess = "Enter team name";
+    static public final String _findAverageMess = "Teams: ";
+    static public final String _nameTeamError ="This nama is not finded";
     static public final String _gamesCountMess = "Enter Games count";
     static public final String _playersCountMess = "Enter Players count";
     static public final String _winCountMess = "Enter Wins count";
@@ -29,10 +34,13 @@ public class UI {
     static public final String _mascotMess = "Enter Mascot";
     static public final String _welcomeMess = "Enter team type(1/2/3)";
     static public final String _errorMess = "ERROR";
-    static public final String _typeMess = ""
-            + "1. Beach football" + "\n"
+    static public final String _typeMess = "1. Beach football" + "\n"
             + "2. American football" + "\n"
             + "3. European football";
+    static public final String _mainFunMess = "1. Find the best team \n" +
+            "2. Sort teams \n" +
+            "3. Find teams that have win cnt > average win cnt \n" +
+            "4. Edit team \n";
     /**
      * Конструктор с параметром
      * @param message - сообщение для пользователя 
@@ -90,31 +98,31 @@ public class UI {
             }
         }
         
-        getDefMess(_nameMess, team);
-        getDefMess(_gamesCountMess, team);
-        getDefMess(_playersCountMess, team);
-        getDefMess(_winCountMess, team);
+        getPropMess(_nameMess, team);
+        getPropMess(_gamesCountMess, team);
+        getPropMess(_playersCountMess, team);
+        getPropMess(_winCountMess, team);
         TeamList teams = new TeamList(userSelection);
         switch (userSelection){
             case "1":
                 BeachFootball beachTeam = new BeachFootball(); 
-                getDefMess(_limTempMess, beachTeam, userSelection);
-                getDefMess(_goalkeepMess, beachTeam, userSelection);
-                getDefMess(_socksMess, beachTeam, userSelection);
+                getPropMess(_limTempMess, beachTeam, userSelection);
+                getPropMess(_goalkeepMess, beachTeam, userSelection);
+                getPropMess(_socksMess, beachTeam, userSelection);
                 team = beachTeam;
                 break;
             case "2":
                 AmericanFootball amerTeam = new AmericanFootball(); 
-                getDefMess(_limTempMess, amerTeam, userSelection);
-                getDefMess(_teamTypeMess, amerTeam, userSelection);
-                getDefMess(_extraArmorMess, amerTeam, userSelection);
+                getPropMess(_limTempMess, amerTeam, userSelection);
+                getPropMess(_teamTypeMess, amerTeam, userSelection);
+                getPropMess(_extraArmorMess, amerTeam, userSelection);
                 team = amerTeam;
                 break;
             case "3":
                 EuropeanFootball europTeam = new EuropeanFootball(); 
-                getDefMess(_mascotMess, europTeam, userSelection);
-                getDefMess(_gameSchemeMess, europTeam, userSelection);
-                getDefMess(_shieldsMess, europTeam, userSelection);
+                getPropMess(_mascotMess, europTeam, userSelection);
+                getPropMess(_gameSchemeMess, europTeam, userSelection);
+                getPropMess(_shieldsMess, europTeam, userSelection);
                 team = europTeam;
                 break;
             default: 
@@ -122,30 +130,31 @@ public class UI {
         }
         teams.add(team);
         league.setTeams(teams);
-        String select = getEditSelection(userSelection, team);
+        String select = getEditSelectionMess(userSelection, team);
+        
     }
     
-    public static void getDefMess(String mess, FootballTeam team, String type){
+    public static void getPropMess(String mess, FootballTeam team, String type){
         System.out.println(mess);
-        boolean verification = selDefVer(mess, scanInput(), team, type);
+        boolean verification = selPropVer(mess, scanInput(), team, type);
         while (!verification){
             System.out.println(_errorMess);
             System.out.println(mess);
-            verification = selDefVer(mess, scanInput(), team);
+            verification = selPropVer(mess, scanInput(), team);
         }
     }
     
-    public static void getDefMess(String mess, FootballTeam team){
+    public static void getPropMess(String mess, FootballTeam team){
         System.out.println(mess);
-        boolean verification = selDefVer(mess, scanInput(), team);
+        boolean verification = selPropVer(mess, scanInput(), team);
         while (!verification){
             System.out.println(_errorMess);
             System.out.println(mess);
-            verification = selDefVer(mess, scanInput(), team);
+            verification = selPropVer(mess, scanInput(), team);
         }
     }
     
-    public static boolean selDefVer(String mess, String userInput, FootballTeam team, 
+    public static boolean selPropVer(String mess, String userInput, FootballTeam team, 
             String type){
         boolean verification = FootballTeam._defaultValueBoolean;
         AmericanFootball amerTeam = null;
@@ -198,7 +207,7 @@ public class UI {
         return verification;
     }
     
-    public static boolean selDefVer(String mess, String userInput, FootballTeam team){
+    public static boolean selPropVer(String mess, String userInput, FootballTeam team){
         boolean verification = FootballTeam._defaultValueBoolean;
         switch (mess){
             case _nameMess:
@@ -230,7 +239,124 @@ public class UI {
          return userInput;           
     }
     
-    public String getEditSelection(String type, FootballTeam team){
+    static public void editTeamMess(FootballTeam team, String type, String select) {
+            switch(select){
+                case "1":
+                    UI.getPropMess(UI._nameMess, team);
+                    break;
+                case "2":
+                    UI.getPropMess(UI._gamesCountMess, team);
+                    break;
+                case "3":
+                    UI.getPropMess(UI._playersCountMess, team);
+                    break;
+                case "4":
+                    UI.getPropMess(UI._winCountMess, team);
+                    break;
+                default:
+                    break;
+            }
+            switch(type){
+                case "1":
+                    switch(select){
+                        case "5":
+                            UI.getPropMess(UI._goalkeepMess, team);
+                        case "6":
+                            UI.getPropMess(UI._limTempMess, team);
+                        case "7":
+                            UI.getPropMess(UI._socksMess, team);
+                        default:
+                            break;
+                    }
+                    break;
+                case "2":
+                    switch(select){
+                        case "5":
+                            UI.getPropMess(UI._extraArmorMess, team);
+                        case "6":
+                            UI.getPropMess(UI._teamTypeMess, team);
+                        case "7":
+                            UI.getPropMess(UI._positionsMess, team);
+                        default:
+                            break;
+                    }
+                    break;
+                case "3":
+                   switch(select){
+                       case "5":
+                            UI.getPropMess(UI._gameSchemeMess, team);
+                        case "6":
+                            UI.getPropMess(UI._shieldsMess, team);
+                        case "7":
+                            UI.getPropMess(UI._mascotMess, team);
+                        default:
+                            break;
+                    }
+                   break;
+               default:
+                   break;
+            }
+    }
+    
+    private void sortTeamMess(League league){
+        System.out.println(_sortMess);
+        league.sortTeams();
+        league.getTeamList();
+    }
+    
+    private void findTheBestMess(League league, String type){
+        System.out.println(_findTheBestMess);
+        FootballTeam team = league.findTheBest();
+        switch(type){
+            case "1":
+                ((BeachFootball)team).getInfo();
+                break;
+            case "2":
+                ((AmericanFootball)team).getInfo();
+                break; 
+            case "3":
+                ((EuropeanFootball)team).getInfo();
+                break;
+            default:
+                break;
+        }
+        
+    }
+    
+    private void findAboveAvMess(League league){
+        System.out.println(_findAverageMess);
+        TeamList lst = league.findAboveAverege();
+        for (int i = 0; i < lst.length(); i++){
+            System.out.println(lst.get(i).getName() + "\n");
+        }
+    }
+    private String getNameTeamMess(League league){
+        System.out.println(_nameTeamMess);
+        String nameTeam = scanInput();
+        while(league.findTeam(nameTeam) == null){
+            System.out.println(_nameTeamError);
+            System.out.println(_nameMess);
+            nameTeam = scanInput();
+        }
+        return league.findTeam(nameTeam).getName();
+    }
+    
+    private int mainFunMess(League league){
+        String userInput = scanInput();
+        switch (userInput){
+            case "1":
+                System.out.println(getNameTeamMess(league));
+                break;
+            case "2":
+                findTheBestMess(league, _typeMess);
+                break;
+            case "4":
+                
+                break
+        }
+    }
+    
+    private String getEditSelectionMess(String type, FootballTeam team){
         System.out.println("Выберете поле для изменения:");
         String select = new String();
         while(true){

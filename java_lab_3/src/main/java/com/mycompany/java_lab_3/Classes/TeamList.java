@@ -159,6 +159,9 @@ public class TeamList {
         _teamMass = new ArrayList<>();
     }
     
+    public TeamList(ArrayList<FootballTeam> teams) {
+        _teamMass = teams;
+    }
     
     public void add(FootballTeam team){
         _teamMass.add(team);
@@ -183,7 +186,7 @@ public class TeamList {
             return team;
 	}
 
-	public ArrayList<FootballTeam> findAboveAverege() {
+	public TeamList findAboveAverege() {
             int averageWins = FootballTeam._defaultValueInt;
             int cntTeam = _teamMass.size();
             for (int i = 0; i< _teamMass.size(); i++){
@@ -196,7 +199,7 @@ public class TeamList {
                     aboveAverageTeam.add(_teamMass.get(i));
                 }
             }
-            return aboveAverageTeam;
+            return new TeamList(aboveAverageTeam);
 	}
 
 	public void sortTeams() {
