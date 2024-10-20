@@ -13,7 +13,7 @@ public class UI {
      */
     public static Scanner _sc; 
     static public final String _nameMess = "Enter Name";
-    static public final String _sortMess = "Command are sorted";
+    static public final String _sortMess = "Teams are sorted";
     static public final String _findTheBestMess = "The best team";
     static public final String _nameTeamMess = "Enter team name";
     static public final String _findAverageMess = "Teams: ";
@@ -41,7 +41,9 @@ public class UI {
     static public final String _mainFunMess = "1. Find the best team \n" +
             "2. Sort teams \n" +
             "3. Find teams that have win cnt > average win cnt \n" +
-            "4. Edit team \n";
+            "4. Edit team \n" +
+            "5. Sort teams \n" +
+            "0. Exit"; //1
     /**
      * Конструктор с параметром
      * @param message - сообщение для пользователя 
@@ -269,24 +271,32 @@ public class UI {
     }
     
     private void mainFunMess(League league, String userSelection){
-        String userInput = scanInput();
-        switch (userInput){
-            case "1":
-                System.out.println(getNameTeamMess(league).getName());
-                break;
-            case "2":
-                findTheBestMess(league, _typeMess);
-                break;
-            case "3":
-                findAboveAvMess(league);
-                break;
-            case "4":
-                FootballTeam localTeam = getNameTeamMess(league);
-                String localSel = getEditSelectionMess(userSelection, localTeam);
-                editTeamMess(localTeam, userSelection, localSel);
-            default:
-                break;
-        }
+        String userInput = new String(); //1
+        do{
+            System.out.println(_mainFunMess); 
+            userInput = scanInput();
+            switch (userInput){
+                case "1":
+                    System.out.println(getNameTeamMess(league).getName());
+                    break;
+                case "2":
+                    findTheBestMess(league, _typeMess);
+                    break;
+                case "3":
+                    findAboveAvMess(league);
+                    break;
+                case "4":
+                    FootballTeam localTeam = getNameTeamMess(league);
+                    String localSel = getEditSelectionMess(userSelection, localTeam);
+                    editTeamMess(localTeam, userSelection, localSel);
+                    break;
+                case "5": //1
+                    sortTeamMess(league);
+                    break;
+                default:
+                    break;
+                }
+        }while(userInput != "0");        
     }
     
     private String getEditSelectionMess(String type, FootballTeam team){
