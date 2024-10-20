@@ -45,7 +45,7 @@ public class AmericanFootball extends FootballTeam{
         return _extraArmor;
     }
     
-    public boolean teamTypeVer(String value){
+    private boolean teamTypeVer(String value){
         return Pattern.matches(_regTeamType, value);
     }
     

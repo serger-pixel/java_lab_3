@@ -45,11 +45,11 @@ public class BeachFootball extends FootballTeam{
         return _socksAllowed;
     }
     
-    public static boolean limitTemperatureVer(String value){
+    private boolean limitTemperatureVer(String value){
         return Pattern.matches(_regLimitTemperature, value);
     }
     
-    public static boolean goalkeeperVer(String value){
+    private boolean goalkeeperVer(String value){
         return Pattern.matches(_regGoalkeeperForm, value);
     }
     

@@ -2,6 +2,19 @@ package main.java.com.mycompany.java_lab_3.Classes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.regex.Pattern;
+import static main.java.com.mycompany.java_lab_3.Classes.UI._extraArmorMess;
+import static main.java.com.mycompany.java_lab_3.Classes.UI._gameSchemeMess;
+import static main.java.com.mycompany.java_lab_3.Classes.UI._gamesCountMess;
+import static main.java.com.mycompany.java_lab_3.Classes.UI._goalkeepMess;
+import static main.java.com.mycompany.java_lab_3.Classes.UI._limTempMess;
+import static main.java.com.mycompany.java_lab_3.Classes.UI._mascotMess;
+import static main.java.com.mycompany.java_lab_3.Classes.UI._nameMess;
+import static main.java.com.mycompany.java_lab_3.Classes.UI._playersCountMess;
+import static main.java.com.mycompany.java_lab_3.Classes.UI._positionsMess;
+import static main.java.com.mycompany.java_lab_3.Classes.UI._shieldsMess;
+import static main.java.com.mycompany.java_lab_3.Classes.UI._socksMess;
+import static main.java.com.mycompany.java_lab_3.Classes.UI._teamTypeMess;
+import static main.java.com.mycompany.java_lab_3.Classes.UI._winCountMess;
 
 public class League {
 
@@ -12,11 +25,6 @@ public class League {
 	private int _year;
         static final String _regYear = "^(19|20)\\d{2}$";
         static final String _regSel = "^(1|2|3)${1}";
-        static enum selections {
-            american,
-            beach,
-            european; 
-        };
         public static String[][] _defaultLeagues = {
             {"SunnyLeague", "1", "Brasil", "2001"},
             {"RegbiLeague", "2", "America", "1990"},
@@ -52,7 +60,6 @@ public class League {
             _teams.sortTeams();
 	}
 
-	
 	public FootballTeam findTeam(String name) {
             return _teams.findTeam(name);
 	}
@@ -73,7 +80,7 @@ public class League {
             return _country;
         }
         
-        public boolean yearVer(String value){
+        private boolean yearVer(String value){
             return Pattern.matches(_regYear, value);
         }
         
@@ -113,7 +120,7 @@ public class League {
             return false;
         }
       
-        public String getTeamList(){
+        public String getTeamListString(){
             String info = new String();
             int select = 1;
             for(int i = 0; i < _teams.length(); i++){
@@ -132,7 +139,78 @@ public class League {
             return false;
         }
         
-        public TeamList getTeams(){
-            return _teams;
+        public static boolean selPropVer(String mess, String userInput, FootballTeam team, 
+            String type){
+        boolean verification = FootballTeam._defaultValueBoolean;
+        AmericanFootball amerTeam = null;
+        BeachFootball beachTeam = null;
+        EuropeanFootball europTeam = null;
+        switch (type){
+            case "2":
+                amerTeam = (AmericanFootball)team;
+                break;
+            case "1":
+                beachTeam = (BeachFootball)team;
+                break;
+            case "3":
+                europTeam = (EuropeanFootball)team;
+                break;
+            default:
+                break;
         }
+        switch (mess){
+            case _limTempMess:
+                verification = beachTeam.setLimitTemperature(userInput);
+                break;
+            case _goalkeepMess:
+                verification = beachTeam.setGoalkeeperForm(userInput);
+                break;
+            case _socksMess:
+                verification = beachTeam.setSocksAllowed(userInput);
+                break;
+            case _teamTypeMess:
+                verification = amerTeam.setTeamType(userInput);
+                break;
+            case _positionsMess:
+                verification = amerTeam.setPositions(userInput);
+                break;
+            case _extraArmorMess:
+                verification = amerTeam.setExtraArmor(userInput);
+                break;
+            case _gameSchemeMess:
+                verification = europTeam.setGameScheme(userInput);
+                break;
+            case _mascotMess:
+                verification = europTeam.setMascot(userInput);
+                break;
+            case _shieldsMess:
+                verification = europTeam.setShields(userInput);
+                break;
+            default:
+                break;
+        }
+        return verification;
+    }
+    
+    public static boolean selPropVer(String mess, String userInput, FootballTeam team){
+        boolean verification = FootballTeam._defaultValueBoolean;
+        switch (mess){
+            case _nameMess:
+                verification = team.setName(userInput);
+                break;
+            case _gamesCountMess:
+                verification = team.setGamesCount(userInput);
+                break;
+            case _playersCountMess:
+                verification = team.setPlayers(userInput);
+                break;
+            case _winCountMess:
+                verification = team.setWinCount(userInput);
+                break;
+            default:
+                break;
+        }
+        return verification;
+    }
+    
 }

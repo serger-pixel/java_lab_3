@@ -2,6 +2,7 @@ package main.java.com.mycompany.java_lab_3.Classes;
 import java.util.regex.Pattern;
 import java.util.Scanner;
 
+
 public class UI {
     /**
      *  Сообщение для пользователя
@@ -130,104 +131,30 @@ public class UI {
         }
         teams.add(team);
         league.setTeams(teams);
-        String select = getEditSelectionMess(userSelection, team);
+        mainFunMess(league, userSelection);
         
     }
     
     public static void getPropMess(String mess, FootballTeam team, String type){
         System.out.println(mess);
-        boolean verification = selPropVer(mess, scanInput(), team, type);
+        boolean verification = League.selPropVer(mess, scanInput(), team, type);
         while (!verification){
             System.out.println(_errorMess);
             System.out.println(mess);
-            verification = selPropVer(mess, scanInput(), team);
+            verification = League.selPropVer(mess, scanInput(), team);
         }
     }
     
     public static void getPropMess(String mess, FootballTeam team){
         System.out.println(mess);
-        boolean verification = selPropVer(mess, scanInput(), team);
+        boolean verification = League.selPropVer(mess, scanInput(), team);
         while (!verification){
             System.out.println(_errorMess);
             System.out.println(mess);
-            verification = selPropVer(mess, scanInput(), team);
+            verification = League.selPropVer(mess, scanInput(), team);
         }
     }
     
-    public static boolean selPropVer(String mess, String userInput, FootballTeam team, 
-            String type){
-        boolean verification = FootballTeam._defaultValueBoolean;
-        AmericanFootball amerTeam = null;
-        BeachFootball beachTeam = null;
-        EuropeanFootball europTeam = null;
-        switch (type){
-            case "2":
-                amerTeam = (AmericanFootball)team;
-                break;
-            case "1":
-                beachTeam = (BeachFootball)team;
-                break;
-            case "3":
-                europTeam = (EuropeanFootball)team;
-                break;
-            default:
-                break;
-        }
-        switch (mess){
-            case _limTempMess:
-                verification = beachTeam.setLimitTemperature(userInput);
-                break;
-            case _goalkeepMess:
-                verification = beachTeam.setGoalkeeperForm(userInput);
-                break;
-            case _socksMess:
-                verification = beachTeam.setSocksAllowed(userInput);
-                break;
-            case _teamTypeMess:
-                verification = amerTeam.setTeamType(userInput);
-                break;
-            case _positionsMess:
-                verification = amerTeam.setPositions(userInput);
-                break;
-            case _extraArmorMess:
-                verification = amerTeam.setExtraArmor(userInput);
-                break;
-            case _gameSchemeMess:
-                verification = europTeam.setGameScheme(userInput);
-                break;
-            case _mascotMess:
-                verification = europTeam.setMascot(userInput);
-                break;
-            case _shieldsMess:
-                verification = europTeam.setShields(userInput);
-                break;
-            default:
-                break;
-        }
-        return verification;
-    }
-    
-    public static boolean selPropVer(String mess, String userInput, FootballTeam team){
-        boolean verification = FootballTeam._defaultValueBoolean;
-        switch (mess){
-            case _nameMess:
-                verification = team.setName(userInput);
-                break;
-            case _gamesCountMess:
-                verification = team.setGamesCount(userInput);
-                break;
-            case _playersCountMess:
-                verification = team.setPlayers(userInput);
-                break;
-            case _winCountMess:
-                verification = team.setWinCount(userInput);
-                break;
-            default:
-                break;
-        }
-        return verification;
-    }
-        
     public String getSelMess(String mess){
         String userInput = scanInput();
         System.out.println(mess);
@@ -239,7 +166,7 @@ public class UI {
          return userInput;           
     }
     
-    static public void editTeamMess(FootballTeam team, String type, String select) {
+    private void editTeamMess(FootballTeam team, String type, String select) {
             switch(select){
                 case "1":
                     UI.getPropMess(UI._nameMess, team);
@@ -301,7 +228,7 @@ public class UI {
     private void sortTeamMess(League league){
         System.out.println(_sortMess);
         league.sortTeams();
-        league.getTeamList();
+        league.getTeamListString();
     }
     
     private void findTheBestMess(League league, String type){
@@ -330,7 +257,7 @@ public class UI {
             System.out.println(lst.get(i).getName() + "\n");
         }
     }
-    private String getNameTeamMess(League league){
+    private FootballTeam getNameTeamMess(League league){
         System.out.println(_nameTeamMess);
         String nameTeam = scanInput();
         while(league.findTeam(nameTeam) == null){
@@ -338,21 +265,27 @@ public class UI {
             System.out.println(_nameMess);
             nameTeam = scanInput();
         }
-        return league.findTeam(nameTeam).getName();
+        return league.findTeam(nameTeam);
     }
     
-    private int mainFunMess(League league){
+    private void mainFunMess(League league, String userSelection){
         String userInput = scanInput();
         switch (userInput){
             case "1":
-                System.out.println(getNameTeamMess(league));
+                System.out.println(getNameTeamMess(league).getName());
                 break;
             case "2":
                 findTheBestMess(league, _typeMess);
                 break;
+            case "3":
+                findAboveAvMess(league);
+                break;
             case "4":
-                
-                break
+                FootballTeam localTeam = getNameTeamMess(league);
+                String localSel = getEditSelectionMess(userSelection, localTeam);
+                editTeamMess(localTeam, userSelection, localSel);
+            default:
+                break;
         }
     }
     
