@@ -48,10 +48,11 @@ public class TeamList {
                                 locWinC = Integer.parseInt(_BeachInfo[i][j]);
                                 break;
                             case 4:
-                                locLimTemp = Integer.parseInt(_BeachInfo[i][j]);
+                                locGKF = _BeachInfo[i][j];
+                                
                                 break;
                             case 5:
-                                locGKF = _BeachInfo[i][j];
+                                locLimTemp = Integer.parseInt(_BeachInfo[i][j]);
                                 break;
                             case 6:
                                 if(_BeachInfo[i][j] == "true"){
@@ -211,7 +212,7 @@ public class TeamList {
 	
 	public FootballTeam findTeam(String name) {
             for (int i = 0; i < _teamMass.size(); i++){
-                if (_teamMass.get(i).getName() == name){
+                if ((_teamMass.get(i)).getName().equals(name)){
                     return _teamMass.get(i);
                 }
             }

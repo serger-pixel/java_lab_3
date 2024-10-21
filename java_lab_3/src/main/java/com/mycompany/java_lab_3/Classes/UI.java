@@ -17,7 +17,7 @@ public class UI {
     static public final String _findTheBestMess = "The best team";
     static public final String _nameTeamMess = "Enter team name";
     static public final String _findAverageMess = "Teams: ";
-    static public final String _nameTeamError ="This nama is not finded";
+    static public final String _nameTeamError ="This name is not found";
     static public final String _gamesCountMess = "Enter Games count";
     static public final String _playersCountMess = "Enter Players count";
     static public final String _winCountMess = "Enter Wins count";
@@ -43,7 +43,7 @@ public class UI {
             "3. Find teams that have win cnt > average win cnt \n" +
             "4. Edit team \n" +
             "5. Sort teams \n" +
-            "0. Exit"; //1
+            "0. Exit"; 
     /**
      * Конструктор с параметром
      * @param message - сообщение для пользователя 
@@ -109,7 +109,7 @@ public class UI {
                 getPropMess(_socksMess, (BeachFootball)team, userSelection);
                 break;
             case "2": 
-                getPropMess(_limTempMess, (AmericanFootball)team, userSelection);
+                getPropMess(_positionsMess, (AmericanFootball)team, userSelection);
                 getPropMess(_teamTypeMess, (AmericanFootball)team, userSelection);
                 getPropMess(_extraArmorMess, (AmericanFootball)team, userSelection);
                 break;
@@ -217,10 +217,10 @@ public class UI {
             }
     }
     
-    private void sortTeamMess(League league){
+    private String sortTeamMess(League league){
         System.out.println(_sortMess);
         league.sortTeams();
-        league.getTeamListString();
+        return league.getTeamListString();
     }
     
     private void findTheBestMess(League league, String type){
@@ -261,7 +261,7 @@ public class UI {
     }
     
     private void mainFunMess(League league, String userSelection){
-        String userInput = new String(); //1
+        String userInput = new String();
         do{
             System.out.println(_mainFunMess); 
             userInput = scanInput();
@@ -280,13 +280,14 @@ public class UI {
                     String localSel = getEditSelectionMess(userSelection, localTeam);
                     editTeamMess(localTeam, userSelection, localSel);
                     break;
-                case "5": //1
-                    sortTeamMess(league);
+                case "5": 
+                    String info = sortTeamMess(league);
+                    System.out.println(info);
                     break;
                 default:
                     break;
                 }
-        }while(userInput != "0");        
+        }while(!"0".equals(userInput));        
     }
     
     private String getEditSelectionMess(String type, FootballTeam team){
