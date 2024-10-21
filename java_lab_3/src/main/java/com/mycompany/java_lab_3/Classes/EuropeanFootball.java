@@ -1,11 +1,12 @@
 package main.java.com.mycompany.java_lab_3.Classes;
 import java.util.regex.Pattern;
 
+
 public class EuropeanFootball extends FootballTeam{
+    static final String _regScheme = "^([0-9]-){2}([0-9])$";
     private String _gameScheme;
     private boolean _shields;
     private String _mascot;
-    static final protected int _maxPlayers = 11;
 
     public EuropeanFootball() {
         super();
@@ -41,9 +42,13 @@ public class EuropeanFootball extends FootballTeam{
     public String getMascot(){
         return _mascot;
     }
-        
+    
+    public boolean schemeVer(String value){
+        return Pattern.matches(_regScheme, value);
+    }
+    
     public boolean setGameScheme(String value){
-        if (stringVer(value)){
+        if (schemeVer(value)){
             _gameScheme = value;
             return true;
         }

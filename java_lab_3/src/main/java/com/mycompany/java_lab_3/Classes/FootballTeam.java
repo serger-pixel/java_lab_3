@@ -32,13 +32,14 @@ public abstract class FootballTeam {
      */
     static final boolean _defaultValueBoolean = false;
     
-    static final protected String _regString = "^[A-Z][a-z]*$";
+    static final protected String _regString = "^[A-Z]+[a-z]*";
     
-    static final protected String _regInt = "^[1-9][0-9]${2}";
+    static final protected String _regInt = "^[1-9][0-9]*";
     
-    static final protected String _regBool = "^(true|false)$";
+    static final protected String _regBool = "(true|false){1}";
     
     static final protected int _maxPlayers = 10;
+    
 
     /**
      * Конструктор по умолчанию

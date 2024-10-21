@@ -7,7 +7,6 @@ public class AmericanFootball extends FootballTeam{
     private String _positions;
     private boolean _extraArmor;
     static final String _regTeamType = "^(attack|protection)$";
-    static final protected int _maxPlayers = 11;
 
     public AmericanFootball() {
         super();

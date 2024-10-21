@@ -8,7 +8,6 @@ public class BeachFootball extends FootballTeam{
     private boolean _socksAllowed;
     static final String _regGoalkeeperForm = "^(shorts|pants)${1}";
     static final String _regLimitTemperature = "^[2-4][0-9]${2}";
-    static final protected int _maxPlayers = 5;
 
     public BeachFootball() {
         super();

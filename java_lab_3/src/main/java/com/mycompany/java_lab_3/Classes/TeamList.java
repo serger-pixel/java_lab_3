@@ -17,7 +17,7 @@ public class TeamList {
     static public final String[][] _EuropeInfo = {
         {"Lion", "90", "11", "70", "4-4-2", "true", "Lyova"},
         {"Wolf", "40", "11", "10", "4-6-0", "false", "Volchara"},
-        {"Capybara", "2", "11", "0", "4-5-1", "true", "Chill Capy"}
+        {"Capybara", "2", "11", "0", "4-5-1", "true", "Capy"}
     };
     
     private ArrayList<FootballTeam> _teamMass;

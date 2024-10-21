@@ -11,7 +11,7 @@ public class UI {
     /*
      *  Объект сканера
      */
-    public static Scanner _sc; 
+    public Scanner _sc; 
     static public final String _nameMess = "Enter Name";
     static public final String _sortMess = "Teams are sorted";
     static public final String _findTheBestMess = "The best team";
@@ -48,25 +48,21 @@ public class UI {
      * Конструктор с параметром
      * @param message - сообщение для пользователя 
      */
-    public UI(String message) {
+    public UI() {
         _sc = new Scanner(System.in);
-        _message = message;
     }
     
     /**
      * Конструктор по умолчанию
      */
-    public UI(){
-        //this(_defaultMess);
-    }
     
     /**
      * Запуск приложения
      */
     public void startApplication(){
-        System.out.println(_welcomeMess);
         FootballTeam team = null;
-        String userSelection = getSelMess(_welcomeMess).substring(0, 1);
+        String userSelection = (getSelMess(_welcomeMess));
+        userSelection.substring(0, 1);
         League league = new League();
         switch (userSelection){
             case "1":
@@ -108,25 +104,19 @@ public class UI {
         TeamList teams = new TeamList(userSelection);
         switch (userSelection){
             case "1":
-                BeachFootball beachTeam = new BeachFootball(); 
-                getPropMess(_limTempMess, beachTeam, userSelection);
-                getPropMess(_goalkeepMess, beachTeam, userSelection);
-                getPropMess(_socksMess, beachTeam, userSelection);
-                team = beachTeam;
+                getPropMess(_limTempMess, (BeachFootball)team, userSelection);
+                getPropMess(_goalkeepMess, (BeachFootball)team, userSelection);
+                getPropMess(_socksMess, (BeachFootball)team, userSelection);
                 break;
-            case "2":
-                AmericanFootball amerTeam = new AmericanFootball(); 
-                getPropMess(_limTempMess, amerTeam, userSelection);
-                getPropMess(_teamTypeMess, amerTeam, userSelection);
-                getPropMess(_extraArmorMess, amerTeam, userSelection);
-                team = amerTeam;
+            case "2": 
+                getPropMess(_limTempMess, (AmericanFootball)team, userSelection);
+                getPropMess(_teamTypeMess, (AmericanFootball)team, userSelection);
+                getPropMess(_extraArmorMess, (AmericanFootball)team, userSelection);
                 break;
-            case "3":
-                EuropeanFootball europTeam = new EuropeanFootball(); 
-                getPropMess(_mascotMess, europTeam, userSelection);
-                getPropMess(_gameSchemeMess, europTeam, userSelection);
-                getPropMess(_shieldsMess, europTeam, userSelection);
-                team = europTeam;
+            case "3": 
+                getPropMess(_mascotMess, (EuropeanFootball)team, userSelection);
+                getPropMess(_gameSchemeMess, (EuropeanFootball)team, userSelection);
+                getPropMess(_shieldsMess, (EuropeanFootball)team, userSelection);
                 break;
             default: 
                 break;
@@ -137,7 +127,7 @@ public class UI {
         
     }
     
-    public static void getPropMess(String mess, FootballTeam team, String type){
+    public void getPropMess(String mess, FootballTeam team, String type){
         System.out.println(mess);
         boolean verification = League.selPropVer(mess, scanInput(), team, type);
         while (!verification){
@@ -147,7 +137,7 @@ public class UI {
         }
     }
     
-    public static void getPropMess(String mess, FootballTeam team){
+    public void getPropMess(String mess, FootballTeam team){
         System.out.println(mess);
         boolean verification = League.selPropVer(mess, scanInput(), team);
         while (!verification){
@@ -158,29 +148,29 @@ public class UI {
     }
     
     public String getSelMess(String mess){
-        String userInput = scanInput();
         System.out.println(mess);
-        while(!League.selVer(mess)){
+        String userInput = scanInput();
+        while(!League.selVer(userInput)){
             System.out.println(_errorMess);
             System.out.println(mess);
             userInput = scanInput();
         }
-         return userInput;           
+        return userInput;           
     }
     
     private void editTeamMess(FootballTeam team, String type, String select) {
             switch(select){
                 case "1":
-                    UI.getPropMess(UI._nameMess, team);
+                    getPropMess(_nameMess, team);
                     break;
                 case "2":
-                    UI.getPropMess(UI._gamesCountMess, team);
+                    getPropMess(_gamesCountMess, team);
                     break;
                 case "3":
-                    UI.getPropMess(UI._playersCountMess, team);
+                    getPropMess(_playersCountMess, team);
                     break;
                 case "4":
-                    UI.getPropMess(UI._winCountMess, team);
+                    getPropMess(_winCountMess, team);
                     break;
                 default:
                     break;
@@ -189,11 +179,11 @@ public class UI {
                 case "1":
                     switch(select){
                         case "5":
-                            UI.getPropMess(UI._goalkeepMess, team);
+                            getPropMess(_goalkeepMess, team);
                         case "6":
-                            UI.getPropMess(UI._limTempMess, team);
+                            getPropMess(_limTempMess, team);
                         case "7":
-                            UI.getPropMess(UI._socksMess, team);
+                            getPropMess(_socksMess, team);
                         default:
                             break;
                     }
@@ -201,11 +191,11 @@ public class UI {
                 case "2":
                     switch(select){
                         case "5":
-                            UI.getPropMess(UI._extraArmorMess, team);
+                            getPropMess(_extraArmorMess, team);
                         case "6":
-                            UI.getPropMess(UI._teamTypeMess, team);
+                            getPropMess(_teamTypeMess, team);
                         case "7":
-                            UI.getPropMess(UI._positionsMess, team);
+                            getPropMess(_positionsMess, team);
                         default:
                             break;
                     }
@@ -213,11 +203,11 @@ public class UI {
                 case "3":
                    switch(select){
                        case "5":
-                            UI.getPropMess(UI._gameSchemeMess, team);
+                            getPropMess(_gameSchemeMess, team);
                         case "6":
-                            UI.getPropMess(UI._shieldsMess, team);
+                            getPropMess(_shieldsMess, team);
                         case "7":
-                            UI.getPropMess(UI._mascotMess, team);
+                            getPropMess(_mascotMess, team);
                         default:
                             break;
                     }
@@ -329,7 +319,7 @@ public class UI {
      * Получение ввода пользователя
      * @return введённую строчку
      */
-    public static String scanInput(){
+    public String scanInput(){
         String inputUser = _sc.nextLine();
         return inputUser;
     }

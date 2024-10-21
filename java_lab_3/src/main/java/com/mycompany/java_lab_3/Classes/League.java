@@ -97,7 +97,7 @@ public class League {
 	}
 
 	public boolean setDivision(String value) {
-		if (FootballTeam.stringVer(value)){
+		if (FootballTeam.intVer(value)){
                     _division = value;
                     return true;
                 }
