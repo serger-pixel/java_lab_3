@@ -26,9 +26,9 @@ public class EuropeanFootball extends FootballTeam{
     @Override
     public String getInfo(){
         return createString() + "\n"+
-                "5. Схема игры: " + _gameScheme + "\n"+
-                "6. Наличие щитков на коленях: " + _shields + "\n" +
-                "7. Маскот:" + _mascot;
+                "5. Game Scheme: " + _gameScheme + "\n"+
+                "6. Knees Shields: " + _shields + "\n" +
+                "7. Mascot:" + _mascot;
     }
     
     public String getGameScheme(){

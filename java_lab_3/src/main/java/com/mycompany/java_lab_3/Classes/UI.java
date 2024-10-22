@@ -38,11 +38,11 @@ public class UI {
     static public final String _typeMess = "1. Beach football" + "\n"
             + "2. American football" + "\n"
             + "3. European football";
-    static public final String _mainFunMess = "1. Find the best team \n" +
-            "2. Sort teams \n" +
-            "3. Find teams that have win cnt > average win cnt \n" +
-            "4. Edit team \n" +
-            "5. Sort teams \n" +
+    static public final String _mainFunMess =
+            "1. Find the best \n" +
+            "2. Find teams that have win cnt > average win cnt \n" +
+            "3. Edit team \n" +
+            "4. Sort teams \n" +
             "0. Exit"; 
     /**
      * Конструктор с параметром
@@ -62,7 +62,6 @@ public class UI {
     public void startApplication(){
         FootballTeam team = null;
         String userSelection = (getSelMess(_welcomeMess));
-        userSelection.substring(0, 1);
         League league = new League();
         switch (userSelection){
             case "1":
@@ -179,11 +178,13 @@ public class UI {
                 case "1":
                     switch(select){
                         case "5":
-                            getPropMess(_goalkeepMess, team);
+                            getPropMess(_goalkeepMess, team, type);
+                            break;
                         case "6":
-                            getPropMess(_limTempMess, team);
+                            getPropMess(_limTempMess, team, type);
+                            break;
                         case "7":
-                            getPropMess(_socksMess, team);
+                            getPropMess(_socksMess, team, type);
                         default:
                             break;
                     }
@@ -191,11 +192,14 @@ public class UI {
                 case "2":
                     switch(select){
                         case "5":
-                            getPropMess(_extraArmorMess, team);
+                            getPropMess(_extraArmorMess, team, type);
+                            break;
                         case "6":
-                            getPropMess(_teamTypeMess, team);
+                            getPropMess(_teamTypeMess, team, type);
+                            break;
                         case "7":
-                            getPropMess(_positionsMess, team);
+                            getPropMess(_positionsMess, team, type);
+                            break;
                         default:
                             break;
                     }
@@ -203,11 +207,14 @@ public class UI {
                 case "3":
                    switch(select){
                        case "5":
-                            getPropMess(_gameSchemeMess, team);
+                            getPropMess(_gameSchemeMess, team, type);
+                            break;
                         case "6":
-                            getPropMess(_shieldsMess, team);
+                            getPropMess(_shieldsMess, team, type);
+                            break;
                         case "7":
-                            getPropMess(_mascotMess, team);
+                            getPropMess(_mascotMess, team, type);
+                            break;
                         default:
                             break;
                     }
@@ -223,32 +230,37 @@ public class UI {
         return league.getTeamListString();
     }
     
-    private void findTheBestMess(League league, String type){
+    private String findTheBestMess(League league, String type){
         System.out.println(_findTheBestMess);
+        String info = new String();
         FootballTeam team = league.findTheBest();
         switch(type){
             case "1":
-                ((BeachFootball)team).getInfo();
+                info = ((BeachFootball)team).getInfo();
                 break;
             case "2":
-                ((AmericanFootball)team).getInfo();
+                info = ((AmericanFootball)team).getInfo();
                 break; 
             case "3":
-                ((EuropeanFootball)team).getInfo();
+                info = ((EuropeanFootball)team).getInfo();
                 break;
             default:
                 break;
         }
+        return info;
         
     }
     
-    private void findAboveAvMess(League league){
+    private String findAboveAvMess(League league){
         System.out.println(_findAverageMess);
+        String info = new String();
         TeamList lst = league.findAboveAverege();
         for (int i = 0; i < lst.length(); i++){
-            System.out.println(lst.get(i).getName() + "\n");
+            info+= lst.get(i).getName()+", ";
         }
+        return info;
     }
+    
     private FootballTeam getNameTeamMess(League league){
         System.out.println(_nameTeamMess);
         String nameTeam = scanInput();
@@ -267,22 +279,19 @@ public class UI {
             userInput = scanInput();
             switch (userInput){
                 case "1":
-                    System.out.println(getNameTeamMess(league).getName());
+                    System.out.println(findTheBestMess(league, userSelection));
                     break;
                 case "2":
-                    findTheBestMess(league, _typeMess);
+                    System.out.println(findAboveAvMess(league));
                     break;
                 case "3":
-                    findAboveAvMess(league);
-                    break;
-                case "4":
                     FootballTeam localTeam = getNameTeamMess(league);
                     String localSel = getEditSelectionMess(userSelection, localTeam);
                     editTeamMess(localTeam, userSelection, localSel);
+                    System.out.println(getInfoTeam(userSelection, localTeam) + "\n");
                     break;
-                case "5": 
-                    String info = sortTeamMess(league);
-                    System.out.println(info);
+                case "4":
+                    System.out.println(sortTeamMess(league));
                     break;
                 default:
                     break;
@@ -290,28 +299,33 @@ public class UI {
         }while(!"0".equals(userInput));        
     }
     
-    private String getEditSelectionMess(String type, FootballTeam team){
-        System.out.println("Выберете поле для изменения:");
-        String select = new String();
-        while(true){
-            switch(type){
+    private String getInfoTeam(String type, FootballTeam team){
+        String info = new String();
+        switch(type){
                 case "1":
-                    ((BeachFootball)team).getInfo();
+                    info = (((BeachFootball)team).getInfo());
                     break;
                 case "2":
-                    ((AmericanFootball)team).getInfo();
+                    info = (((AmericanFootball)team).getInfo());
                     break;
                 case "3":
-                    ((EuropeanFootball)team).getInfo();
+                    info = (((EuropeanFootball)team).getInfo());;
                     break;
                 default:
                     break;
-            }
-            select = scanInput();
-            if(Pattern.matches("^([1-7])$", select)){
-                break;
-            }
+        }
+        return info;
+    }
+    
+    private String getEditSelectionMess(String type, FootballTeam team){
+        System.out.println("Select a field that you want to change:");
+        System.out.println(getInfoTeam(type, team));
+        String select = new String();
+        select = scanInput();
+        while(!Pattern.matches("^([1-7])$", select)){
+            System.out.println(getInfoTeam(type, team));
             System.out.println("Select from 1 to 7");
+            select = scanInput();
         }
         return select;
     }

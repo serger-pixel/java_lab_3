@@ -27,9 +27,9 @@ public class BeachFootball extends FootballTeam{
     @Override
     public String getInfo(){
         return createString() + "\n"+
-                "5. Форма вратаря: " + _goalkeeperForm + "\n"+
-                "6. Максимальная температура поля: " + _limitTemperature + "\n" +
-                "7. Наличие носков: " + _socksAllowed;
+                "5. Goalkeeper's uniform: " + _goalkeeperForm + "\n"+
+                "6. Max field temperature: " + _limitTemperature + "\n" +
+                "7. Socks allowed " + _socksAllowed;
     }
     
     public int getLimitTemperature(){

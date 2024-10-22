@@ -69,6 +69,7 @@ public class TeamList {
                     locGamesC, locWinC, locLimTemp, locGKF, locSocksA);
                     _teamMass.add(localTeam);
                 }
+                break;
             case "2":
                 String locTeamType = FootballTeam._defaultValueString;
                 String locPositions = FootballTeam._defaultValueString;

@@ -27,9 +27,9 @@ public class AmericanFootball extends FootballTeam{
     @Override
     public String getInfo(){
         return createString() + "\n"+
-                "5. Наличие доп. защиты: " + _extraArmor + "\n"+
-                "6. Тип команды: " + _teamType + "\n" +
-                "7. Позиции:" + _positions;
+                "5. Extra armor: " + _extraArmor + "\n"+
+                "6. Team type (attack/defence): " + _teamType + "\n" +
+                "7. Positions:" + _positions;
     }
     
     public String getTeamType(){

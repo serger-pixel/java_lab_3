@@ -133,10 +133,10 @@ public abstract class FootballTeam {
     }
     
     protected String createString(){
-        return "Information about team:\n " + "1. Название команды:" + _name + "\n"+ 
-                "2. Кол-во игр: " + _gamesCount + "\n"+
-                "3. Кол-во игроков: " + _players + "\n"+
-                "4. Кол-во выигранных игр: " + _winCount;
+        return "Information about team:\n " + "1. Name:" + _name + "\n"+ 
+                "2. Games count: " + _gamesCount + "\n"+
+                "3. Players count: " + _players + "\n"+
+                "4. Win games count: " + _winCount;
     }
     
     public String getInfo(){
