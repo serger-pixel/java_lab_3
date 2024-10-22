@@ -126,13 +126,13 @@ public class UI {
         
     }
     
-    public void getPropMess(String mess, FootballTeam team, String type){
+    public void getPropMess(String mess, FootballTeam team, String type){ 
         System.out.println(mess);
         boolean verification = League.selPropVer(mess, scanInput(), team, type);
         while (!verification){
             System.out.println(_errorMess);
             System.out.println(mess);
-            verification = League.selPropVer(mess, scanInput(), team);
+            verification = League.selPropVer(mess, scanInput(), team, type);//1
         }
     }
     

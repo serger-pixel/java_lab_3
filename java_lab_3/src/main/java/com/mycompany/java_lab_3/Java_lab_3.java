@@ -14,7 +14,7 @@ public class Java_lab_3 {
         System.out.println("Hello World!");
         UI app = new UI();
         app.startApplication();
-//          String regex = "^([0-9]-){2}([0-9])$";
-//          System.out.println(Pattern.matches(regex, "9-3-"));
+//          String regex = "(true|false){1}";
+//          System.out.println(Pattern.matches(regex, "false"));
     }
 }
