@@ -151,7 +151,7 @@ public abstract class FootballTeam {
      * @return логическое значение
      */
     public static boolean stringToBool(String value){
-        if (value == "true"){
+        if ("true".equals(value)){
                return true;
         }
         return false;
