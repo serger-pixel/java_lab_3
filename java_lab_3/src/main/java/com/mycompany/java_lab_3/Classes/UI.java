@@ -162,7 +162,7 @@ public class UI {
         }
         System.out.println(_nameMess);
         getPropMess(_nameMess, team);
-        System.out.println(_gameSchemeMess);
+        System.out.println(_gamesCountMess);
         getPropMess(_gamesCountMess, team);
         System.out.println(_playersCountMess);
         getPropMess(_playersCountMess, team);
@@ -171,27 +171,27 @@ public class UI {
         TeamList teams = new TeamList(userSelection);
         switch (userSelection){
             case "1":
-                getPropMess(_limTempMess, team);
+                System.out.println(_limTempMess);
                 getPropMess(_limTempMess, (BeachFootball)team, userSelection);
-                getPropMess(_goalkeepMess, team);
+                System.out.println(_goalkeepMess);
                 getPropMess(_goalkeepMess, (BeachFootball)team, userSelection);
-                getPropMess(_socksMess, team);
+                System.out.println(_socksMess);
                 getPropMess(_socksMess, (BeachFootball)team, userSelection);
                 break;
             case "2": 
-                getPropMess(_positionsMess, team);
+                System.out.println(_positionsMess);
                 getPropMess(_positionsMess, (AmericanFootball)team, userSelection);
-                getPropMess(_teamTypeMess, team);
+                System.out.println(_teamTypeMess);
                 getPropMess(_teamTypeMess, (AmericanFootball)team, userSelection);
-                getPropMess(_extraArmorMess, team);
+                System.out.println(_extraArmorMess);
                 getPropMess(_extraArmorMess, (AmericanFootball)team, userSelection);
                 break;
             case "3": 
-                getPropMess(_mascotMess, team);
+                System.out.println(_mascotMess);
                 getPropMess(_mascotMess, (EuropeanFootball)team, userSelection);
-                getPropMess(_gameSchemeMess, team);
+                System.out.println(_gameSchemeMess);
                 getPropMess(_gameSchemeMess, (EuropeanFootball)team, userSelection);
-                getPropMess(_shieldsMess, team);
+                System.out.println(_shieldsMess);
                 getPropMess(_shieldsMess, (EuropeanFootball)team, userSelection);
                 break;
             default: 

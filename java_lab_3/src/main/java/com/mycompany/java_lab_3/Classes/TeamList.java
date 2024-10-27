@@ -15,18 +15,18 @@ public class TeamList {
      * Данные для создания команд по амерекансому футболу
      */
     static public final String[][] _AmericInfo = {
-        {"Liberty", "70", "11", "35", "attack", "Center, offensive guard", 
+        {"Liberty", "70", "10", "35", "attack", "Center, offensive guard", 
             "true"},
-        {"Eagle", "55", "11", "30", "protection", "Middle, tackle", "false"},
-        {"Maggots", "30", "11", "0", "attack", "Center, RB", "true"}    
+        {"Eagle", "55", "10", "30", "protection", "Middle, tackle", "false"},
+        {"Maggots", "30", "10", "0", "attack", "Center, RB", "true"}    
     };
     /**
      * Данные для создания команд по европейскому футболу
      */
     static public final String[][] _EuropeInfo = {
-        {"Lion", "90", "11", "70", "4-4-2", "true", "Lyova"},
-        {"Wolf", "40", "11", "10", "4-6-0", "false", "Volchara"},
-        {"Capybara", "2", "11", "0", "4-5-1", "true", "Capy"}
+        {"Lion", "90", "10", "70", "4-4-2", "true", "Lyova"},
+        {"Wolf", "40", "10", "10", "4-6-0", "false", "Volchara"},
+        {"Capybara", "2", "10", "0", "4-5-1", "true", "Capy"}
     };
     /**
      * Массив для хранения команд
@@ -150,7 +150,7 @@ public class TeamList {
                                 locGameScheme= _EuropeInfo[i][j];
                                 break;
                             case 6:
-                                locMascot= _AmericInfo[i][j];
+                                locMascot= _EuropeInfo[i][j];
                                 break;
                             case 5:
                                 if(_EuropeInfo[i][j] == "true"){
