@@ -2,7 +2,9 @@ package main.java.com.mycompany.java_lab_3.Classes;
 import java.util.regex.Pattern;
 import java.util.Scanner;
 
-
+/**
+ * класс интерфейса
+ */
 public class UI {
     /**
      *  Сообщение для пользователя
@@ -123,6 +125,7 @@ public class UI {
      */
     public void startApplication(){
         FootballTeam team = null;
+        System.out.println(_welcomeMess);
         String userSelection = (getSelMess(_welcomeMess));
         League league = new League();
         switch (userSelection){
@@ -157,26 +160,38 @@ public class UI {
                     break;      
             }
         }
-        
+        System.out.println(_nameMess);
         getPropMess(_nameMess, team);
+        System.out.println(_gameSchemeMess);
         getPropMess(_gamesCountMess, team);
+        System.out.println(_playersCountMess);
         getPropMess(_playersCountMess, team);
+        System.out.println(_winCountMess);
         getPropMess(_winCountMess, team);
         TeamList teams = new TeamList(userSelection);
         switch (userSelection){
             case "1":
+                getPropMess(_limTempMess, team);
                 getPropMess(_limTempMess, (BeachFootball)team, userSelection);
+                getPropMess(_goalkeepMess, team);
                 getPropMess(_goalkeepMess, (BeachFootball)team, userSelection);
+                getPropMess(_socksMess, team);
                 getPropMess(_socksMess, (BeachFootball)team, userSelection);
                 break;
             case "2": 
+                getPropMess(_positionsMess, team);
                 getPropMess(_positionsMess, (AmericanFootball)team, userSelection);
+                getPropMess(_teamTypeMess, team);
                 getPropMess(_teamTypeMess, (AmericanFootball)team, userSelection);
+                getPropMess(_extraArmorMess, team);
                 getPropMess(_extraArmorMess, (AmericanFootball)team, userSelection);
                 break;
             case "3": 
+                getPropMess(_mascotMess, team);
                 getPropMess(_mascotMess, (EuropeanFootball)team, userSelection);
+                getPropMess(_gameSchemeMess, team);
                 getPropMess(_gameSchemeMess, (EuropeanFootball)team, userSelection);
+                getPropMess(_shieldsMess, team);
                 getPropMess(_shieldsMess, (EuropeanFootball)team, userSelection);
                 break;
             default: 
@@ -189,13 +204,12 @@ public class UI {
     }
     
     /**
-     * Вывод сообщения для установки поля
+     * Проверка ввода поля
      * @param mess сообщение
      * @param team команда
      * @param type тип команды
      */
     public void getPropMess(String mess, FootballTeam team, String type){
-        System.out.println(mess);
         boolean verification = League.selPropVer(mess, scanInput(), team, type);
         while (!verification){
             System.out.println(_errorMess);
@@ -205,12 +219,11 @@ public class UI {
     }
     
     /**
-     * Вывод сообщения для установки поля
+     * роверка ввода поля
      * @param mess сообщение
      * @param team команда
      */
     public void getPropMess(String mess, FootballTeam team){
-        System.out.println(mess);
         boolean verification = League.selPropVer(mess, scanInput(), team);
         while (!verification){
             System.out.println(_errorMess);
@@ -220,12 +233,11 @@ public class UI {
     }
     
     /**
-     * Вывод сообщения для выбора типа
+     * Проверка выбора типа команды
      * @param mess - сообщение
      * @return выбор пользователя
      */
     public String getSelMess(String mess){
-        System.out.println(mess);
         String userInput = scanInput();
         while(!League.selVer(userInput)){
             System.out.println(_errorMess);
@@ -236,7 +248,7 @@ public class UI {
     }
     
         /**
-     * Вывод сообщения для редактирования команды
+     * Редактирование команды
      * @param team команда
      * @param type тип команды
      * @param select выбор пользователя для редактирования
@@ -321,8 +333,8 @@ public class UI {
     
     /**
      * Возращает информацию о лучшей команде
-     * @param league - лига
-     * @param type - тип команды
+     * @param league  лига
+     * @param type  тип команды
      * @return информация о команде
      */
     private String findTheBestMess(League league, String type){
@@ -375,7 +387,7 @@ public class UI {
     }
     
     /**
-     * Вывод сообщений о главных функциях программы
+     * Осуществление главных функций программы
      * @param league лига
      * @param userSelection тип команды
      */
@@ -387,14 +399,14 @@ public class UI {
             switch (userInput){
                 case "1":
                     System.out.println(_findTheBestMess);
-                    System.out.println(findTheBestMess(league, userSelection));
+                    System.out.println(findTheBestMess(league, userSelection) + "\n");
                     break;
                 case "2":
                     System.out.println(_findAverageMess);
                     System.out.println(findAboveAvMess(league));
                     break;
                 case "3":
-                    System.out.println(_findAverageMess);
+                    System.out.println(_nameMess);
                     FootballTeam localTeam = getNameTeamMess(league);
                     String localSel = getEditSelectionMess(userSelection, localTeam);
                     editTeamMess(localTeam, userSelection, localSel);

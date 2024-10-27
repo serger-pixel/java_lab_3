@@ -54,10 +54,10 @@ public class TeamList {
                             case 0:
                                 locName = _BeachInfo[i][j];
                                 break;
-                            case 1:
+                            case 2:
                                 locPlayers = Integer.parseInt(_BeachInfo[i][j]);
                                 break;
-                            case 2:
+                            case 1:
                                 locGamesC = Integer.parseInt(_BeachInfo[i][j]);
                                 break;
                             case 3:
@@ -96,10 +96,10 @@ public class TeamList {
                             case 0:
                                 locName = _AmericInfo[i][j];
                                 break;
-                            case 1:
+                            case 2:
                                 locPlayers = Integer.parseInt(_AmericInfo[i][j]);
                                 break;
-                            case 2:
+                            case 1:
                                 locGamesC = Integer.parseInt(_AmericInfo[i][j]);
                                 break;
                             case 3:
@@ -137,10 +137,10 @@ public class TeamList {
                             case 0:
                                 locName = _EuropeInfo[i][j];
                                 break;
-                            case 1:
+                            case 2:
                                 locPlayers = Integer.parseInt(_EuropeInfo[i][j]);
                                 break;
-                            case 2:
+                            case 1:
                                 locGamesC = Integer.parseInt(_EuropeInfo[i][j]);
                                 break;
                             case 3:

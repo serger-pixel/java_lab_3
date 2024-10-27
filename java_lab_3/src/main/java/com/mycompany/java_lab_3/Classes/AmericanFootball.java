@@ -64,7 +64,7 @@ public class AmericanFootball extends FootballTeam{
     public String getInfo(){
         return createString() + "\n"+
                 "5. Extra armor: " + _extraArmor + "\n"+
-                "6. Team type (attack/defence): " + _teamType + "\n" +
+                "6. Team type (attack/protection): " + _teamType + "\n" +
                 "7. Positions:" + _positions;
     }
     
