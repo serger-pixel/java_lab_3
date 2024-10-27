@@ -17,20 +17,52 @@ import static main.java.com.mycompany.java_lab_3.Classes.UI._teamTypeMess;
 import static main.java.com.mycompany.java_lab_3.Classes.UI._winCountMess;
 
 public class League {
-
+        /**
+         * Имя лиги
+         */
 	private String _name;
+        /**
+         * Список команд
+         */
 	private TeamList _teams;
+        /**
+         * Номер дивизиона
+         */
 	private String _division;
+        /**
+         * Название страны
+         */
         private String _country;
+        /**
+         * Год проведения
+         */
 	private int _year;
+        /**
+         * Регулярное выражения для проверки года
+         */
         static final String _regYear = "^(19|20)\\d{2}$";
+        /**
+         * Регулярное выражения для проверки выбора типа команды
+         */
         static final String _regSel = "^(1|2|3)${1}";
+        
+        /**
+         * Набор данных про лиги
+         */
         public static String[][] _defaultLeagues = {
             {"SunnyLeague", "1", "Brasil", "2001"},
             {"RegbiLeague", "2", "America", "1990"},
             {"FootLeague", "3", "Germany", "1995"}
         };
         
+        /**
+         * 
+         * @param name - имя лиги
+         * @param teams - список команд
+         * @param division - номер дивизиона 
+         * @param year - год
+         * @param country - страна
+         */
 	public League(String name, TeamList teams, 
                 String division, int year, String country) {
             _name = name;
@@ -41,6 +73,9 @@ public class League {
             
 	}
 
+        /**
+         * Конструктор по умолчанию
+         */
 	public League() {
             _name = FootballTeam._defaultValueString;
             _division = FootballTeam._defaultValueString;
@@ -48,46 +83,93 @@ public class League {
             _year = FootballTeam._defaultValueInt;
 	}
 
+        /**
+         * Поиск лучшей команды
+         * @return команда
+         */
 	public FootballTeam findTheBest() {
             return _teams.findTheBest();
 	}
         
+        /**
+         * Поиск команд лиги,у которых кол-во побед выше, чем среднее значение
+         * @return команда
+         */
 	public TeamList findAboveAverege() {
             return _teams.findAboveAverege();
 	}
 
+        /**
+         * Сортировка команд лиги
+         */
 	public void sortTeams() {
             _teams.sortTeams();
 	}
 
+        /**
+         * Поиск команды из лиги
+         * @param name - имя команды
+         * @return команда
+         */
 	public FootballTeam findTeam(String name) {
             return _teams.findTeam(name);
 	}
 
+        /**
+         * Возвращение имени лиги
+         * @return имя лиги
+         */
 	public String getName() {
             return _name;
 	}
         
+        /**
+         * Возвращение номера дивизиона
+         * @return номер дивизиона
+         */
 	public String getDivision() {
             return _division;
 	}
 
+        /**
+         * Возвращение года лиги
+         * @return год
+         */
 	public int getYear() {
             return _year;
 	}
         
+        /**
+         * Возвращение название страна
+         * @return название страны
+         */
         public String getCountry(){
             return _country;
         }
         
+        /**
+         * Проверка года
+         * @param value - значение года
+         * @return результат проверки
+         */
         private boolean yearVer(String value){
             return Pattern.matches(_regYear, value);
         }
         
+        /**
+         * Проверка выбора типа команды
+         * @param value - значение типа команды
+         * @return результат проверки
+         */
         public static boolean selVer(String value){
             return Pattern.matches(_regSel, value);
         }
         
+        /**
+         * Устанвка имени лиги
+         * @param name - имя лиги
+         * @return результат успешности установки
+         */
 	public boolean setName(String name) {
             if (FootballTeam.stringVer(name)){
                 _name = name;
@@ -96,6 +178,11 @@ public class League {
             return false;
 	}
 
+        /**
+         * Устанвка номера дивизиона
+         * @param value - номер дивизиона
+         * @return результат успешности установки
+         */
 	public boolean setDivision(String value) {
 		if (FootballTeam.intVer(value)){
                     _division = value;
@@ -103,7 +190,12 @@ public class League {
                 }
             return false;
         }
-
+        
+        /**
+         * Установка года лиги
+         * @param value - значение года
+         * @return результат успешности установки
+         */
 	public boolean setYear(String value) {
 		if (yearVer(value)){
                     _year = Integer.parseInt(value);
@@ -112,6 +204,11 @@ public class League {
                 return false;       
 	}
         
+        /**
+         * Установка названия страны
+         * @param value - название страны
+         * @return результат успешности установки
+         */
         public boolean setCountry(String value){
             if(FootballTeam.stringVer(value)){
                 _country = value;
@@ -119,7 +216,11 @@ public class League {
             }
             return false;
         }
-      
+        
+        /**
+         * Получение списка-строчки имен команд
+         * @return список-строчку имен команд
+         */
         public String getTeamListString(){
             String info = new String();
             int select = 1;
@@ -131,6 +232,11 @@ public class League {
             return info;
         }
         
+        /**
+         * Установка команд лиги
+         * @param tl - команда
+         * @return результат успешности установки
+         */
         public boolean setTeams(TeamList tl){
             if(tl != null){
                 _teams = tl;
@@ -139,6 +245,14 @@ public class League {
             return false;
         }
         
+        /**
+         * Установка полей по селектору выбора
+         * @param mess - сообщение для ввода определенного поля
+         * @param userInput - пользовательский ввод
+         * @param team - команда
+         * @param type - тип команды
+         * @return успешность установки поля
+         */
         public static boolean selPropVer(String mess, String userInput, FootballTeam team, 
             String type){
         boolean verification = FootballTeam._defaultValueBoolean;
@@ -192,6 +306,13 @@ public class League {
         return verification;
     }
     
+    /**
+     * Установка полей по селектору выбора
+     * @param mess - сообщение для ввода определенного поля
+     * @param userInput - пользовательский ввод
+     * @param team - команда
+     * @return успешность установки поля
+     */
     public static boolean selPropVer(String mess, String userInput, FootballTeam team){
         boolean verification = FootballTeam._defaultValueBoolean;
         switch (mess){
