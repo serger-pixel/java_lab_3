@@ -340,19 +340,7 @@ public class UI {
     private String findTheBestMess(League league, String type){
         String info = new String();
         FootballTeam team = league.findTheBest();
-        switch(type){
-            case "1":
-                info = ((BeachFootball)team).getInfo();
-                break;
-            case "2":
-                info = ((AmericanFootball)team).getInfo();
-                break; 
-            case "3":
-                info = ((EuropeanFootball)team).getInfo();
-                break;
-            default:
-                break;
-        }
+        info = team.getInfo();
         return info;
         
     }
@@ -410,7 +398,7 @@ public class UI {
                     FootballTeam localTeam = getNameTeamMess(league);
                     String localSel = getEditSelectionMess(userSelection, localTeam);
                     editTeamMess(localTeam, userSelection, localSel);
-                    System.out.println(getInfoTeam(userSelection, localTeam) + "\n");
+                    System.out.println(localTeam.getInfo() + "\n");
                     break;
                 case "4":
                     System.out.println(_sortMess);
@@ -422,29 +410,6 @@ public class UI {
         }while(!"0".equals(userInput));        
     }
     
-    /**
-     * Создание строчки с информацией о команде
-     * @param type тип команды
-     * @param team команда
-     * @return строчка с информацией
-     */
-    private String getInfoTeam(String type, FootballTeam team){
-        String info = new String();
-        switch(type){
-                case "1":
-                    info = (((BeachFootball)team).getInfo());
-                    break;
-                case "2":
-                    info = (((AmericanFootball)team).getInfo());
-                    break;
-                case "3":
-                    info = (((EuropeanFootball)team).getInfo());;
-                    break;
-                default:
-                    break;
-        }
-        return info;
-    }
     
     /**
      * Вывод сообщений для редактирования команды
@@ -454,11 +419,11 @@ public class UI {
      */
     private String getEditSelectionMess(String type, FootballTeam team){
         System.out.println("Select a field that you want to change:");
-        System.out.println(getInfoTeam(type, team));
+        System.out.println(team.getInfo());
         String select = new String();
         select = scanInput();
         while(!Pattern.matches("^([1-7])$", select)){
-            System.out.println(getInfoTeam(type, team));
+            System.out.println(team.getInfo());
             System.out.println("Select from 1 to 7");
             select = scanInput();
         }
